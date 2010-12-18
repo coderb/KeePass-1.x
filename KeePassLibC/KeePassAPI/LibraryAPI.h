@@ -22,7 +22,7 @@
 
 #include "APIDefEx.h"
 
-#define KEEPASS_LIBRARY_BUILD 0x00000005
+#define KEEPASS_LIBRARY_BUILD 0x00000010
 
 KP_SHARE DWORD GetKeePassVersion();
 KP_SHARE LPCTSTR GetKeePassVersionString();

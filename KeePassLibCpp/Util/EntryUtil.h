@@ -17,30 +17,12 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ___TRANSLATE_EX_H___
-#define ___TRANSLATE_EX_H___
+#ifndef ___ENTRY_UTIL_H___
+#define ___ENTRY_UTIL_H___
 
-#include "../SysDefEx.h"
+// C_FN_SHARE LPTSTR PwEntryToString(const PW_ENTRY *lpEntry);
+// C_FN_SHARE BOOL StringToPwEntry(PW_ENTRY *pEntry, LPCTSTR lpEntryString);
 
-#define MAX_TRANSLATION_STRINGS 556
+// BOOL ReadPwStringItem(LPCTSTR lpEntryString, DWORD *pdwPos, CString *pStore);
 
-// Translate a string
-#ifndef _UNICODE
-#define TRL(sptr) _TRL(sptr)
-#else
-#define TRL(sptr) _TRL(_T(sptr))
-#endif
-
-#define TRL_VAR(stptr) _TRL(stptr)
-
-#define TRL_MODE_DEF FALSE
-#define TRL_MODE_TRL TRUE
-
-C_FN_SHARE BOOL LoadTranslationTable(LPCTSTR pszTableName);
-C_FN_SHARE BOOL FreeCurrentTranslationTable();
-
-C_FN_SHARE LPCTSTR _TRL(LPCTSTR pszDefString);
-
-C_FN_SHARE LPCTSTR GetCurrentTranslationTable();
-
-#endif // ___TRANSLATE_EX_H___
+#endif // ___ENTRY_UTIL_H___
