@@ -17,38 +17,13 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#if !defined(AFX_KEEPASSLIB_H__36D52416_E37B_401E_840F_3B39336FE5FB__INCLUDED_)
-#define AFX_KEEPASSLIB_H__36D52416_E37B_401E_840F_3B39336FE5FB__INCLUDED_
+#ifndef ___POPULAR_PASSWORDS_H___
+#define ___POPULAR_PASSWORDS_H___
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
-#ifndef __AFXWIN_H__
-#error Include 'StdAfx.h' before including this file for PCH
-#endif
+#include "../SysDefEx.h"
 
-#include "Resource.h"
+bool IsPopularPassword(LPCTSTR lpPassword);
 
-/////////////////////////////////////////////////////////////////////////////
-// CKeePassLibApp
-// See KeePassLib.cpp for the implementation of this class
-
-class CKeePassLibApp : public CWinApp
-{
-public:
-	CKeePassLibApp();
-
-	//{{AFX_VIRTUAL(CKeePassLibApp)
-	//}}AFX_VIRTUAL
-
-	//{{AFX_MSG(CKeePassLibApp)
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
-};
-
-/////////////////////////////////////////////////////////////////////////////
-
-//{{AFX_INSERT_LOCATION}}
-
-#endif // !defined(AFX_KEEPASSLIB_H__36D52416_E37B_401E_840F_3B39336FE5FB__INCLUDED_)
+#endif // ___POPULAR_PASSWORDS_H___
