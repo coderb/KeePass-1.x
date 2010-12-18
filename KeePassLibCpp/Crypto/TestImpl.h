@@ -33,8 +33,7 @@
 #define TI_ERR_UINT_TYPE       256
 #define TI_ERR_INT_TYPE        512
 
-C_FN_SHARE UINT32 TestCryptoImpl();
-
+UINT32 TestCryptoImpl();
 UINT32 TestTypeDefs();
 
 #endif

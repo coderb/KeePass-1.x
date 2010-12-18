@@ -17,15 +17,40 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "../../KeePassLibCpp/SysDefEx.h"
+#include "StdAfx.h"
+#include "MsgRelayWnd.h"
 
-#include <string>
+#include <algorithm>
 
-#define FL_LOCK_SUFFIX       _T(".lock")
+BOOL CMsgRelayWnd::m_bRelayEnabled = FALSE;
+HWND CMsgRelayWnd::m_hRelayTarget = NULL;
+std::vector<UINT> CMsgRelayWnd::m_vRelayedMessages;
 
-// Times in minutes
-#define FL_TIME_RELOCK_AFTER 9
-#define FL_TIME_LOCKING      12
+void CMsgRelayWnd::EnableRelaying(BOOL bEnable)
+{
+	m_bRelayEnabled = bEnable;
+}
 
-BOOL FileLock_Lock(LPCTSTR lpFile, BOOL bLock);
-BOOL FileLock_IsLocked(LPCTSTR lpFile, std::basic_string<TCHAR>& strLockingUser);
+void CMsgRelayWnd::SetRelayTarget(HWND hWndTarget)
+{
+	m_hRelayTarget = hWndTarget;
+}
+
+void CMsgRelayWnd::AddRelayedMessage(UINT uMessage)
+{
+	m_vRelayedMessages.push_back(uMessage);
+}
+
+LRESULT CMsgRelayWnd::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if(m_bRelayEnabled != FALSE) // Relaying enabled
+	{
+		if(std::find(m_vRelayedMessages.begin(), m_vRelayedMessages.end(),
+			message) != m_vRelayedMessages.end())
+		{
+			::PostMessage(m_hRelayTarget, message, wParam, lParam);
+		}
+	}
+
+	return CWnd::WindowProc(message, wParam, lParam);
+}

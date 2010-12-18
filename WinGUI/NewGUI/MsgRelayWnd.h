@@ -17,15 +17,27 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "../../KeePassLibCpp/SysDefEx.h"
+#ifndef ___CMSGRELAYWND_H___
+#define ___CMSGRELAYWND_H___
 
-#include <string>
+#pragma once
 
-#define FL_LOCK_SUFFIX       _T(".lock")
+#include <vector>
 
-// Times in minutes
-#define FL_TIME_RELOCK_AFTER 9
-#define FL_TIME_LOCKING      12
+class CMsgRelayWnd : public CWnd
+{
+public:
+	static void EnableRelaying(BOOL bEnable);
+	static void SetRelayTarget(HWND hWndTarget);
+	static void AddRelayedMessage(UINT uMessage);
 
-BOOL FileLock_Lock(LPCTSTR lpFile, BOOL bLock);
-BOOL FileLock_IsLocked(LPCTSTR lpFile, std::basic_string<TCHAR>& strLockingUser);
+protected:
+	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
+
+private:
+	static BOOL m_bRelayEnabled;
+	static HWND m_hRelayTarget;
+	static std::vector<UINT> m_vRelayedMessages;
+};
+
+#endif // ___CMSGRELAYWND_H___

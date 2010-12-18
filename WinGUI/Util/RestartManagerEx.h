@@ -17,15 +17,21 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "../../KeePassLibCpp/SysDefEx.h"
+/*
+#ifndef ___RESTART_MANAGER_EX_H___
+#define ___RESTART_MANAGER_EX_H___
 
-#include <string>
+typedef HRESULT(WINAPI *LPREGISTERAPPLICATIONRESTART)(PCWSTR pwzCommandLine,
+	DWORD dwFlags);
 
-#define FL_LOCK_SUFFIX       _T(".lock")
+class CRestartManagerEx
+{
+private:
+	CRestartManagerEx();
 
-// Times in minutes
-#define FL_TIME_RELOCK_AFTER 9
-#define FL_TIME_LOCKING      12
+public:
+	static void Register();
+};
 
-BOOL FileLock_Lock(LPCTSTR lpFile, BOOL bLock);
-BOOL FileLock_IsLocked(LPCTSTR lpFile, std::basic_string<TCHAR>& strLockingUser);
+#endif // ___RESTART_MANAGER_EX_H___
+*/

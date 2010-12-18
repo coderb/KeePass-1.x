@@ -27,7 +27,7 @@
 #include "BCMenu.h"
 #include "SystemTray.h"
 
-class CPP_CLASS_SHARE CSystemTrayEx : public CSystemTray
+class CSystemTrayEx : public CSystemTray
 {
 protected:
 	virtual void CustomizeMenu(CMenu *pMenu);
