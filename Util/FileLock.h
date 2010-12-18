@@ -17,20 +17,14 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ___TEST_IMPL_H___
-#define ___TEST_IMPL_H___
+#include <windows.h>
+#include "SysDefEx.h"
 
-#include "../Util/SysDefEx.h"
+#define FL_LOCK_SUFFIX       _T(".lock")
 
-#define TI_ERR_SHAVAR32          1
-#define TI_ERR_SHAVAR64          2
-#define TI_ERR_SHACMP256         4
-#define TI_ERR_SHACMP512         8
-#define TI_ERR_RIJNDAEL_ENCRYPT 16
-#define TI_ERR_RIJNDAEL_DECRYPT 32
-#define TI_ERR_ARCFOUR_CRYPT    64
-#define TI_ERR_TWOFISH         128
+// Times in minutes
+#define FL_TIME_RELOCK_AFTER 9
+#define FL_TIME_LOCKING      12
 
-C_FN_SHARE unsigned long testCryptoImpl();
-
-#endif
+C_FN_SHARE BOOL FileLock_Lock(LPCTSTR lpFile, BOOL bLock);
+C_FN_SHARE BOOL FileLock_IsLocked(LPCTSTR lpFile);
