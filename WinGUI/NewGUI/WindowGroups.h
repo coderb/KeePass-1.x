@@ -22,9 +22,9 @@
 
 #include "NewGUICommon.h"
 
-#define WG_OFFSET_TOP  105
-#define WG_OFFSET_LEFT  35
-#define WG_Y_STEP       20
+#define WG_OFFSET_TOP  98
+#define WG_OFFSET_LEFT 25
+#define WG_Y_STEP      20
 
 #define WGF_REPOSITION 1
 

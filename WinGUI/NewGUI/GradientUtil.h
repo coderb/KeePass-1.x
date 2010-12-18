@@ -17,33 +17,36 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ___APPLICATION_UTILITIES_H___
-#define ___APPLICATION_UTILITIES_H___
+#ifndef ___GRADIENT_UTIL_H___
+#define ___GRADIENT_UTIL_H___
 
-#pragma once
+#include <boost/utility.hpp>
+#include <windows.h>
 
-#include "../SysDefEx.h"
+#define GU_GF_LIB_NAME _T("MsImg32.dll")
+#define GU_GF_FN_NAME "GradientFill"
 
-// Maximum temporary buffer for SecureDeleteFile
-#define SDF_BUF_SIZE 4096
+typedef BOOL(WINAPI* LPFNGRADIENTFILL)(HDC hdc, PTRIVERTEX pVertex, ULONG dwNumVertex,
+	PVOID pMesh, ULONG dwNumMesh, ULONG dwMode);
 
-#define AU_MAX_WRITE_BLOCK 65535
+class CGradientUtil : boost::noncopyable
+{
+public:
+	static void Release();
 
-// Get the application's directory; without \\ at the end
-BOOL AU_GetApplicationDirectory(LPTSTR lpStoreBuf, DWORD dwBufLen, BOOL bFilterSpecial, BOOL bMakeURL);
+	static bool IsSupported();
 
-#ifndef _WIN32_WCE
-BOOL AU_SecureDeleteFile(LPCTSTR pszFilePath);
-#endif // _WIN32_WCE
+	static bool DrawGradient(HDC hdc, LONG x1, LONG y1, LONG x2, LONG y2,
+		COLORREF clrBase, bool bVertical);
 
-int AU_WriteBigFile(LPCTSTR lpFilePath, const BYTE* pData, DWORD dwDataSize,
-	BOOL bTransacted);
+private:
+	CGradientUtil();
 
-BOOL AU_IsWin9xSystem();
-BOOL AU_IsAtLeastWinVistaSystem();
+	static bool EnsureInitialized();
 
-// #ifndef _WIN32_WCE
-// BOOL AU_RemoveZoneIdentifier(LPCTSTR lpFile);
-// #endif // _WIN32_WCE
+	static bool m_bInitialized;
+	static HMODULE m_hImgLib;
+	static LPFNGRADIENTFILL m_lpGradientFill;
+};
 
-#endif // ___APPLICATION_UTILITIES_H___
+#endif // ___GRADIENT_UTIL_H___

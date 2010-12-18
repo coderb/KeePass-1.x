@@ -17,33 +17,30 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ___APPLICATION_UTILITIES_H___
-#define ___APPLICATION_UTILITIES_H___
+/*
+#ifndef ___VISTA_MENU_H___
+#define ___VISTA_MENU_H___
 
 #pragma once
 
-#include "../SysDefEx.h"
+#include <afxtempl.h>
+#include <vector>
 
-// Maximum temporary buffer for SecureDeleteFile
-#define SDF_BUF_SIZE 4096
+class CVistaMenu : public CMenu
+{
+	DECLARE_DYNAMIC(CVistaMenu)
 
-#define AU_MAX_WRITE_BLOCK 65535
+public:
+	CVistaMenu();
+	virtual ~CVistaMenu();
 
-// Get the application's directory; without \\ at the end
-BOOL AU_GetApplicationDirectory(LPTSTR lpStoreBuf, DWORD dwBufLen, BOOL bFilterSpecial, BOOL bMakeURL);
+	void LoadToolbar(UINT uToolBar, UINT uBitmap);
 
-#ifndef _WIN32_WCE
-BOOL AU_SecureDeleteFile(LPCTSTR pszFilePath);
-#endif // _WIN32_WCE
+private:
+	void DeleteBitmaps();
 
-int AU_WriteBigFile(LPCTSTR lpFilePath, const BYTE* pData, DWORD dwDataSize,
-	BOOL bTransacted);
+	std::vector<CBitmap*> m_vBitmaps;
+};
 
-BOOL AU_IsWin9xSystem();
-BOOL AU_IsAtLeastWinVistaSystem();
-
-// #ifndef _WIN32_WCE
-// BOOL AU_RemoveZoneIdentifier(LPCTSTR lpFile);
-// #endif // _WIN32_WCE
-
-#endif // ___APPLICATION_UTILITIES_H___
+#endif // ___VISTA_MENU_H___
+*/
