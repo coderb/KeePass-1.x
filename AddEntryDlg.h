@@ -35,6 +35,7 @@
 #include "NewGUI/HyperEdit.h"
 #include "NewGUI/ShadeButtonST.h"
 #include "NewGUI/amsEdit.h"
+#include "NewGUI/AutoRichEditCtrl.h"
 
 #include "PwSafe/PwManager.h"
 
@@ -59,7 +60,10 @@ public:
 	int m_nGroupId;
 	int m_nIconId;
 
+	CString m_strNotes;
 	PW_TIME m_tExpire;
+
+	BCMenu m_popmenu;
 
 	//{{AFX_DATA(CAddEntryDlg)
 	enum { IDD = IDD_ADDENTRY_DLG };
@@ -75,17 +79,18 @@ public:
 	CEdit	m_pEditPw;
 	CWzComboBox	m_pGroups;
 	BOOL	m_bStars;
-	CString	m_strNotes;
 	CString	m_strPassword;
 	CString	m_strRepeatPw;
 	CString	m_strTitle;
 	CString	m_strURL;
 	CString	m_strUserName;
+	CAutoRichEditCtrl	m_reNotes;
 	//}}AFX_DATA
 
 	//{{AFX_VIRTUAL(CAddEntryDlg)
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 	//}}AFX_VIRTUAL
 
 protected:
@@ -96,6 +101,13 @@ protected:
 	afx_msg void OnCheckHidePw();
 	afx_msg void OnPickIconBtn();
 	afx_msg void OnRandomPwBtn();
+	afx_msg void OnReCopyAll();
+	afx_msg void OnReCopySel();
+	afx_msg void OnReDelete();
+	afx_msg void OnRePaste();
+	afx_msg void OnReSelectAll();
+	afx_msg void OnReCut();
+	afx_msg void OnReUndo();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

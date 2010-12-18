@@ -27,20 +27,42 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ___TRANSLATE_EX_H___
-#define ___TRANSLATE_EX_H___
+#ifndef AFX_TANWIZARDDLG_H__C738F700_624E_11D8_BF16_0050BF14F5CC__INCLUDED_
+#define AFX_TANWIZARDDLG_H__C738F700_624E_11D8_BF16_0050BF14F5CC__INCLUDED_
 
-#define MAX_TRANSLATION_STRINGS 320
+#include "NewGUI/ShadeButtonST.h"
+#include "NewGUI/KCSideBannerWnd.h"
 
-// Translate string, sptr must be a char*, _not_ a TCHAR* !
-#define TRL(sptr) _TRL(sptr)
+/////////////////////////////////////////////////////////////////////////////
 
-#define TRL_MODE_DEF FALSE
-#define TRL_MODE_TRL TRUE
+class CTanWizardDlg : public CDialog
+{
+public:
+	CTanWizardDlg(CWnd* pParent = NULL);
 
-BOOL LoadTranslationTable(const char *pszTableName);
-BOOL FreeCurrentTranslationTable();
+	CKCSideBannerWnd m_banner;
 
-const char *_TRL(const char *pszDefString);
+	//{{AFX_DATA(CTanWizardDlg)
+	enum { IDD = IDD_TANWIZARD_DLG };
+	CShadeButtonST	m_btCancel;
+	CShadeButtonST	m_btOK;
+	CString	m_strTans;
+	//}}AFX_DATA
 
-#endif // ___TRANSLATE_EX_H___
+	//{{AFX_VIRTUAL(CTanWizardDlg)
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);
+	//}}AFX_VIRTUAL
+
+protected:
+	//{{AFX_MSG(CTanWizardDlg)
+	virtual BOOL OnInitDialog();
+	virtual void OnOK();
+	virtual void OnCancel();
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+};
+
+//{{AFX_INSERT_LOCATION}}
+
+#endif // AFX_TANWIZARDDLG_H__C738F700_624E_11D8_BF16_0050BF14F5CC__INCLUDED_
