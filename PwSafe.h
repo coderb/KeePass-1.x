@@ -38,6 +38,7 @@
 	#error include 'stdafx.h' before including this file for PCH
 #endif
 
+#include "afxmt.h"
 #include "resource.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -47,9 +48,15 @@ class CPwSafeApp : public CWinApp
 public:
 	CPwSafeApp();
 
+	static BOOL RegisterShellAssociation();
+	static BOOL UnregisterShellAssociation();
+
+	CMutex *m_pAppMutex;
+
 	//{{AFX_VIRTUAL(CPwSafeApp)
 	public:
 	virtual BOOL InitInstance();
+	virtual int ExitInstance();
 	//}}AFX_VIRTUAL
 
 	//{{AFX_MSG(CPwSafeApp)

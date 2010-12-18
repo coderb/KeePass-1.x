@@ -27,22 +27,36 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ___TRANSLATE_EX_H___
-#define ___TRANSLATE_EX_H___
+#ifndef AFX_CUSTOMTREECTRLEX_H__EE7BE580_7102_11D8_BF16_0050BF14F5CC__INCLUDED_
+#define AFX_CUSTOMTREECTRLEX_H__EE7BE580_7102_11D8_BF16_0050BF14F5CC__INCLUDED_
 
-#define MAX_TRANSLATION_STRINGS 400
+/////////////////////////////////////////////////////////////////////////////
 
-// Translate string, sptr must be a char*, _not_ a TCHAR* !
-#define TRL(sptr) _TRL(sptr)
+class CCustomTreeCtrlEx : public CTreeCtrl
+{
+public:
+	CCustomTreeCtrlEx();
 
-#define TRL_MODE_DEF FALSE
-#define TRL_MODE_TRL TRUE
+	CWnd *m_pParentI;
 
-BOOL LoadTranslationTable(const char *pszTableName);
-BOOL FreeCurrentTranslationTable();
+public:
+	//{{AFX_VIRTUAL(CCustomTreeCtrlEx)
+	//}}AFX_VIRTUAL
 
-const char *_TRL(const char *pszDefString);
+public:
+	virtual ~CCustomTreeCtrlEx();
 
-const TCHAR *GetCurrentTranslationTable();
+protected:
+	//{{AFX_MSG(CCustomTreeCtrlEx)
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnSysKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	//}}AFX_MSG
 
-#endif // ___TRANSLATE_EX_H___
+	DECLARE_MESSAGE_MAP()
+};
+
+/////////////////////////////////////////////////////////////////////////////
+
+//{{AFX_INSERT_LOCATION}}
+
+#endif // AFX_CUSTOMTREECTRLEX_H__EE7BE580_7102_11D8_BF16_0050BF14F5CC__INCLUDED_
