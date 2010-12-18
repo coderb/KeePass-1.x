@@ -17,11 +17,18 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-/*
-#ifndef ___UPDATE_CHECK_H___
-#define ___UPDATE_CHECK_H___
+#ifndef ___NEW_DIALOGS_EX_H___
+#define ___NEW_DIALOGS_EX_H___
 
-void CheckForUpdateAsync(HWND hParent, DWORD dwCurVer, LPCTSTR lpLatestURL, BOOL bForeground);
+#include <boost/utility.hpp>
 
-#endif
-*/
+class CNewDialogsEx : boost::noncopyable
+{
+public:
+	static void ShowError(HWND hParent, int nErrorCode, DWORD dwFlags);
+
+private:
+	CNewDialogsEx();
+};
+
+#endif // ___NEW_DIALOGS_EX_H___
