@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2008 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2009 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,16 +17,32 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ___KEEPASS_MESSAGE_INTERFACE_H___
-#define ___KEEPASS_MESSAGE_INTERFACE_H___
+#ifndef ___KPCOMMANDLINEOPTIONIMPL_H___
+#define ___KPCOMMANDLINEOPTIONIMPL_H___
 
-#include "KeePluginDef.h"
+#include "../../KeePassLibCpp/SDK/KpSDK.h"
+#include "../Util/CmdLine/CommandLineOption.h"
 
-void KPMI_SetMainDialog(void *pMainPwSafeDlg);
+#pragma pack(1)
 
-C_FN_SHARE DWORD_PTR KP_API KP_Call(DWORD dwCode, LPARAM lParamW, LPARAM lParamL, LPARAM lParamM);
-C_FN_SHARE DWORD_PTR KP_API KP_Query(DWORD dwCode, LPARAM lParam);
+class CKpCommandLineOptionImpl : public IKpCommandLineOption
+{
+public:
+	CKpCommandLineOptionImpl(LPCTSTR lpOptionName);
 
-void KPMI_AutoType(PW_ENTRY *pEntry, LONG_PTR lFlags);
+	KP_DECL_IUNKNOWN;
 
-#endif // ___KEEPASS_MESSAGE_INTERFACE_H___
+	STDMETHODIMP_(LPCTSTR) GetOptionName();
+	STDMETHODIMP_(BOOL) IsOption(LPCTSTR lpArgument);
+	STDMETHODIMP_(LPTSTR) GetOptionValue(LPCTSTR lpArgument);
+	STDMETHODIMP_(DWORD) GetOptionValueOffset();
+
+private:
+	KP_DECL_STDREFIMPL;
+
+	CommandLineOption* m_pOpt;
+};
+
+#pragma pack()
+
+#endif // ___KPCOMMANDLINEOPTIONIMPL_H___
