@@ -17,30 +17,18 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ___TRANSLATE_EX_H___
-#define ___TRANSLATE_EX_H___
+#ifndef ___PATTERN_BASED_GENERATOR_H___
+#define ___PATTERN_BASED_GENERATOR_H___
 
-#include "../SysDefEx.h"
+#include "PasswordGenerator.h"
 
-#define MAX_TRANSLATION_STRINGS 570
+#define PbgWString std::basic_string<WCHAR>
 
-// Translate a string
-#ifndef _UNICODE
-#define TRL(sptr) _TRL(sptr)
-#else
-#define TRL(sptr) _TRL(_T(sptr))
-#endif
+PWG_ERROR PbgGenerate(std::vector<WCHAR>& vOutBuffer,
+	const PW_GEN_SETTINGS_EX* pSettings, CNewRandom* pRandomSource);
 
-#define TRL_VAR(stptr) _TRL(stptr)
+PbgWString PbgExpandPattern(const PbgWString& strPattern);
 
-#define TRL_MODE_DEF FALSE
-#define TRL_MODE_TRL TRUE
+void PbgAppendChar(std::vector<WCHAR>& vOutBuffer, WCHAR wch, DWORD& rdwPos);
 
-C_FN_SHARE BOOL LoadTranslationTable(LPCTSTR pszTableName);
-C_FN_SHARE BOOL FreeCurrentTranslationTable();
-
-C_FN_SHARE LPCTSTR _TRL(LPCTSTR pszDefString);
-
-C_FN_SHARE LPCTSTR GetCurrentTranslationTable();
-
-#endif // ___TRANSLATE_EX_H___
+#endif // ___PATTERN_BASED_GENERATOR_H___
