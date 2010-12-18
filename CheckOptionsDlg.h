@@ -27,77 +27,64 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ___PW_EXPORT_H___
-#define ___PW_EXPORT_H___
+#if !defined(AFX_CHECKOPTIONSDLG_H__5F6F5781_A123_11D9_BF17_0050BF14F5CC__INCLUDED_)
+#define AFX_CHECKOPTIONSDLG_H__5F6F5781_A123_11D9_BF17_0050BF14F5CC__INCLUDED_
 
-#include "PwManager.h"
-#include "../Util/SysDefEx.h"
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
 
-#define PWEXP_NULL 0
-#define PWEXP_TXT  1
-#define PWEXP_HTML 2
-#define PWEXP_XML  3
-#define PWEXP_CSV  4
-#define PWEXP_LAST 5
+#include "NewGUI/NewGUICommon.h"
+#include "NewGUI/KCSideBannerWnd.h"
+#include "NewGUI/XPStyleButtonST.h"
+#include "NewGUI/OptionsList.h"
 
 typedef struct
 {
-	BOOL bGroup;
-	BOOL bGroupTree;
-	BOOL bTitle;
-	BOOL bUserName;
-	BOOL bURL;
-	BOOL bPassword;
-	BOOL bNotes;
-	BOOL bUUID;
-	BOOL bImage;
-	BOOL bCreationTime;
-	BOOL bLastAccTime;
-	BOOL bLastModTime;
-	BOOL bExpireTime;
-	BOOL bAttachment;
+	LPCTSTR lpString;
+	BOOL *pbValue;
+	int nIcon;
+} CHKOPT_PARAM;
 
-	BOOL bEncodeNewlines;
-	BOOL bExportBackups;
-} PWEXPORT_OPTIONS;
+/////////////////////////////////////////////////////////////////////////////
 
-class CPwExport
+class CCheckOptionsDlg : public CDialog
 {
 public:
-	CPwExport();
-	virtual ~CPwExport();
+	CCheckOptionsDlg(CWnd* pParent = NULL);
 
-	void SetManager(CPwManager *pMgr);
-	void SetFormat(int nFormat);
-	void SetNewLineSeq(BOOL bWindows);
+	void CleanUp();
 
-	BOOL ExportAll(const TCHAR *pszFile, const PWEXPORT_OPTIONS *pOptions);
-	BOOL ExportGroup(const TCHAR *pszFile, DWORD dwGroupId, const PWEXPORT_OPTIONS *pOptions);
+	DWORD m_dwNumParams;
+	CHKOPT_PARAM *m_pParams;
 
-	CString MakeGroupTreeString(DWORD dwGroupId);
+	CString m_strTitle;
+	CString m_strDescription;
 
-	PWEXPORT_OPTIONS m_aDefaults[PWEXP_LAST];
-	int m_nFormat;
+	CKCSideBannerWnd m_banner;
+	CImageList m_ilOptionIcons;
 
-private:
-	void _ExpStr(LPCTSTR lpString);
-	void _ExpXmlStr(LPCTSTR lpString);
-	void _ExpHtmlStr(LPCTSTR lpString);
+	//{{AFX_DATA(CCheckOptionsDlg)
+	enum { IDD = IDD_CHECKOPTIONS_DLG };
+	COptionsList	m_olOptions;
+	CXPStyleButtonST	m_btCancel;
+	CXPStyleButtonST	m_btOK;
+	//}}AFX_DATA
 
-	void _ExpResetSkip();
-	void _ExpSetSep(LPCTSTR lpSep);
-	void _ExpStrIf(BOOL bCondition, LPCTSTR lpString);
-	void _ExpXmlStrIf(BOOL bCondition, LPCTSTR lpString);
-	void _ExpHtmlStrIf(BOOL bCondition, LPCTSTR lpString);
-	void _ExpCsvStrIf(BOOL bCondition, LPCTSTR lpString);
+	//{{AFX_VIRTUAL(CCheckOptionsDlg)
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);
+	//}}AFX_VIRTUAL
 
-	CPwManager *m_pMgr;
-	TCHAR *m_pszNewLine;
-
-	FILE *m_fp;
-	BOOL m_bOneSkipped;
-	LPCTSTR m_lpSep;
-	const PWEXPORT_OPTIONS *m_pOptions;
+protected:
+	//{{AFX_MSG(CCheckOptionsDlg)
+	virtual BOOL OnInitDialog();
+	virtual void OnOK();
+	virtual void OnCancel();
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
 };
 
-#endif
+//{{AFX_INSERT_LOCATION}}
+
+#endif // !defined(AFX_CHECKOPTIONSDLG_H__5F6F5781_A123_11D9_BF17_0050BF14F5CC__INCLUDED_)
